@@ -1,0 +1,43 @@
+# This file can be used to create a conda environment named 'keras-env' with Python 3.9 and install the listed packages. CPU and GPU versions are
+# necessary when creating this environment to run on a windows machine.  CPU can be installed on windows native and GPU can be installed on WSL. When
+# attempting to install GPU on a windows native system, the cuda added to tensorflow and jax will throw errors causing the libraries to install earlier
+# releases that will cause the environment to fail leading to the scripts to error out.
+
+# To create the environment, run: (this can take some time to run)
+# 
+#     conda env create -f _configs/environment_CPU.yml
+#
+# After creating the environment, activate it using:
+#
+#     conda activate keras-env
+#
+# If you need to delete the environment, run:
+#
+#     conda env remove --name keras-env
+#
+# This will set up your environment with the specified dependencies.
+
+name: keras-env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+      - matplotlib
+      - pandas
+      - scikit-learn
+      - tensorflow
+      - jax
+      - jaxlib
+      - keras==3.4.1  # replace with latest version.  This line is necessary to upgrade keras after installing tensorflow which may install non-3.0 keras
+      - pyyaml
+      - mlflow
+      - tqdm
+      - jupyter 
+      - ipykernel
+      - notebook
+      - ipywidgets
+      - graphviz
+      - pydot

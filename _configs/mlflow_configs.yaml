@@ -1,0 +1,5 @@
+# mlflow configs path to storage and experiment name that will be set in the mlflow UI
+mlflow_storage_path: file:mlflow_data_storage
+experiment_name: MNIST_Classifier
+
+# open the mlflow UI with this command: mlflow ui --backend-store-uri mlflow_data_storage
