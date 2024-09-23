@@ -1,6 +1,6 @@
 # Keras Blueprint for Image Classification
 
-This repo contains a blueprint for image classification using Keras. The blueprint is designed to be a starting point for supervised image classification 
+This repo contains a blueprint for image classification using Keras 3.0. The blueprint is designed to be a starting point for supervised image classification 
 tasks and can easily be modified to train a regression model or other basic supervised learning tasks.
 
 ## Running the Blueprint
