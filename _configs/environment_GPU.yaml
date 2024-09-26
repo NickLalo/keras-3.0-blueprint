@@ -5,7 +5,7 @@
 
 # To create the environment, run: (this can take some time to run)
 # 
-#     conda env create -f _configs/environment_GPU.yml
+#     conda env create -f _configs/environment_GPU.yaml
 #
 # After creating the environment, activate it using:
 #
