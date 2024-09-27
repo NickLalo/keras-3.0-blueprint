@@ -7,7 +7,6 @@ import sys
 import traceback
 from datetime import datetime, timezone, timedelta
 import io
-import re
 
 
 def get_time_stamp():

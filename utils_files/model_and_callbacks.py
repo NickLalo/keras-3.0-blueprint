@@ -11,7 +11,6 @@ import csv
 import yaml
 import keras
 import matplotlib.pyplot as plt
-from pathlib import PurePath
 import tensorflow as tf
 import mlflow
 
@@ -57,7 +56,7 @@ def build_and_compile_model(input_shape, num_of_classes, train_params_and_info: 
     # set the mixed precision policy if a GPU is being used.  This can greatly speed up training on a tensor core GPU, but may not speed up training 
     # on all GPUs.  However, setting this policy could cause the model to train slower on a non-tensor core GPU, so it is best to test both ways.
     if gpu_available:
-        print("GPU detected by JAX backend, setting mixed precision policy to 'mixed_float16' for faster training on tensor core GPUs")
+        print("GPU detected, attempting to set mixed precision policy to 'mixed_float16' for faster training on tensor core GPUs")
         keras.mixed_precision.set_global_policy("mixed_float16")
     
     # define the model

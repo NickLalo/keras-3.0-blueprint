@@ -91,9 +91,9 @@ if __name__ == "__main__":
     #       a few tests, the results are very close to the original results.
     parameters_dict = {
         "kfold_index": 0,
-        "debug_run": False,
-        "small_train_set": True,
-        "epoch_limit": 20,  # NOTE: set to 20 for a quick run, reset the value to 999 to train the a model that finishes training based on early stopping
+        "debug_run": False,  # if True, will use a very very minimal dataset to test code execution
+        "small_train_set": False,  # if True, will use a small subset of the training data to give a quick test of how the model is training
+        "epoch_limit": 999,
         "reduce_lr_on_plateau": True,
         "dropout_rate": 0.25,
         "learning_rate": 0.001,
