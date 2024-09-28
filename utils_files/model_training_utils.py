@@ -21,6 +21,8 @@ import numpy as np
 import tensorflow as tf
 import jax
 import mlflow
+import pynvml
+
 
 # add the parent directory of this file to the sys.path so that utils can be imported if the script is run from utils directory
 sys.path.append(str(Path(__file__).resolve().parents[1]))
@@ -116,8 +118,13 @@ class Training_Parameters_and_Info():
         random.seed(112)
         np.random.seed(112)
         keras.utils.set_random_seed(112)
-        tf.random.set_seed(112)
-        jax.random.PRNGKey(112)
+        
+        # get backend from keras and set the random seed for the backend
+        keras_backend = keras.backend.backend()
+        if keras_backend == "tensorflow":
+            tf.random.set_seed(112)
+        if keras_backend == "jax":
+            jax.random.PRNGKey(112)
         
         # save the training parameters to a json file in the model and metrics directory
         self.save_params_as_json()
@@ -582,3 +589,31 @@ def create_placeholder_training_and_validation_loss_plot(csv_filename: PurePath)
     print(f"Placeholder training and validation loss plot saved to {fig_save_path}.")
     print(f"The plot is currently empty, but will be updated as training progresses.\n")
     return
+
+
+def check_GPU_RAM(device_id=0, in_gb=False):
+    """
+    example usage:
+    gpu_ram_mb = check_GPU_RAM(device_id=0)  # returns in MB
+    gpu_ram_gb = check_GPU_RAM(device_id=0, in_gb=True)  # returns in GB
+    NOTE: not utilized anywhere currently, but a great tool to help figure out where some memory issues are coming from
+    """
+    # Initialize NVML
+    pynvml.nvmlInit()
+    
+    # Get the handle for the GPU device
+    handle = pynvml.nvmlDeviceGetHandleByIndex(device_id)
+    
+    # Get memory info for the device
+    memory_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
+    
+    # Get memory usage in bytes, then convert to MB or GB
+    if in_gb:
+        used_memory = memory_info.used / (1024 ** 3)  # Convert bytes to GB
+    else:
+        used_memory = memory_info.used / (1024 ** 2)  # Convert bytes to MB
+    
+    # Clean up NVML
+    pynvml.nvmlShutdown()
+    
+    return used_memory

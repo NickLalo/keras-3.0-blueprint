@@ -31,7 +31,7 @@ dependencies:
       - tensorflow[and-cuda]
       - jax[cuda12]
       - jaxlib
-      - keras==3.4.1  # replace with latest version.  This line is necessary to upgrade keras after installing tensorflow which may install non-3.0 keras
+      - keras
       - pyyaml
       - mlflow
       - tqdm
@@ -42,3 +42,6 @@ dependencies:
       - pynvml  # library to check GPU usage
       - graphviz
       - pydot
+      - nvidia-pyindex  # Add NVIDIA's Python index to access their pip packages
+      - nvidia-tensorrt  # Install TensorRT via pip
+      - nvidia-ml-py3  # library to check GPU usage

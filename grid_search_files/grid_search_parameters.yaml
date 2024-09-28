@@ -1,0 +1,35 @@
+# file to hold the many different options for a grid search.  
+# Parameter options can be added or removed during the grid search to expand or minimize the search space.  One option must remain for each parameter.
+# run random_grid_search.py to run a random grid search with the parameters in this file.
+
+# parameters that are typically fixed
+kfold_index: # useful for kfold cross validating the best model after it is found
+  - 0
+debug_run:
+  - False
+small_train_set:
+  - False
+epoch_limit:
+  - 999
+
+# parameters to search over
+dropout_rate:
+  - 0.0
+  - 0.25
+  - 0.5
+  - 0.75
+learning_rate:
+  - 0.001
+  - 0.0001
+early_stopping_patience:
+  - 10
+  - 20
+batch_size:
+  - 32
+  - 64
+  - 128
+  - 256
+  - 512
+reduce_lr_on_plateau:
+  - True
+  - False

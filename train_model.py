@@ -60,6 +60,7 @@ def train_example_MNIST_model(train_params_and_info: Training_Parameters_and_Inf
         validation_data=(x_val, y_val),
         callbacks=callbacks_list,
     )
+    
     # load the best model from training to evaluate on the test set
     model = load_keras_model(train_params_and_info.best_model_path)
     print(f"best model loaded from: {train_params_and_info.best_model_path}\n")

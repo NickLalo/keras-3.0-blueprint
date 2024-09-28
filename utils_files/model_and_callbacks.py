@@ -141,18 +141,23 @@ class Clean_Up_Checkpoints_Callback(keras.callbacks.Callback):
     def on_train_end(self, logs=None):
         """
         Called at the end of training. Deletes all but the best (last saved) model checkpoint.
-        
+        Models are only saved when the validation loss improves, so by sorting the list, the best model is the last one saved.
         Args:
             logs (dict, optional): Currently, this argument is ignored.
         """
+        # get a list of all the model saves in the checkpoint directory
+        model_saves_list = os.listdir(self.checkpoint_dir)
+        # sort the list of model saves so that the best model is the last one saved
+        model_saves_list.sort()
+        
         # remove all but the last model (the best model)
-        for model_save in os.listdir(self.checkpoint_dir)[:-1]:
+        for model_save in model_saves_list[:-1]:
             # remove all model checkpoints that were saved on the way to the best model
             model_to_delete = self.checkpoint_dir.joinpath(model_save)
             os.remove(model_to_delete)
         
         # save the last model name to the train_params_and_info object because it is the best model
-        best_model_path = self.checkpoint_dir.joinpath(os.listdir(self.checkpoint_dir)[-1])
+        best_model_path = self.checkpoint_dir.joinpath(model_saves_list[-1])
         # NOTE: if the Clean_Up_Checkpoints_Callback is not being used (like when training a GAN), this calculation of best model path needs to be
         # moved elsewhere, otherwise later code that tries to access train_params_and_info.best_model_path will see the value as None
         self.train_params_and_info.best_model_path = best_model_path
